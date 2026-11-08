@@ -1,5 +1,7 @@
 # google-ai-mode-bulk-delete
 
+**繁體中文** ｜ [简体中文](README.zh-CN.md) ｜ [English](README.en.md)
+
 Google AI 模式（AI Mode）的**批次刪除**與**內容匯出** Chrome 擴充功能，免費、無廣告、沒有任何數量上限。
 
 原本要付費解鎖的功能，這裡全部自己實作。
@@ -31,7 +33,6 @@ ai-mode-bulk-delete/     擴充功能本體（manifest、content script、popup�
   content/i18n.js        三語字串
   content/s2t.js         簡體轉繁體（OpenCC 對照表）
   test/                  端到端測試（headless Chrome）與測試用假頁面
-vm/                      開發用的 Hyper-V 測試機腳本（跟擴充功能無關）
 ```
 
 ## 測試
