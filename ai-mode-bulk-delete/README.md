@@ -1,5 +1,7 @@
 # AI 模式 · 批次刪除
 
+**繁體中文** ｜ [简体中文](README.zh-CN.md) ｜ [English](README.en.md)
+
 在 Google AI 模式（`google.com/search?udm=50` / AI 模式頁）的左側「最近的討論串」列表上，
 畫出勾選框、支援全選，然後一次把勾起來的討論串通通刪掉。
 
