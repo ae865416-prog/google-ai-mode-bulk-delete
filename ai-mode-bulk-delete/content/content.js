@@ -1545,7 +1545,7 @@
     for (const arr of grouped.values()) if (arr.length >= 2) arr.forEach(addCard);
 
     // 3) 空殼 <a>：Google 的來源／廣告卡片常常是「一個沒有文字、只有 aria-label 的連 <a>」
-    //    真正的網站名、標題、摘要都放在它的兄弟節點裡（風 抓到的就是這種）
+    //    真正的網站名、標題、摘要都放在它的兄弟節點裡（實際頁面常見的結構）
     //    只有「卡片上的字真的包含 aria-label」時才動手，避免誤殺正文裡的引用小標
     const shellOk = (a) => {
       if (!a || a.tagName !== 'A') return false;

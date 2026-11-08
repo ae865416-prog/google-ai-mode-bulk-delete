@@ -270,7 +270,7 @@ const NTHREAD = 'document.querySelectorAll(".thread").length';
     await evalJS(cdp, SR + '.querySelector("[data-act=none]").click()');
     await evalJS(cdp, '(()=>{const s=' + SR + ';const it=s.querySelectorAll(".item");[0,2,8].forEach((i)=>it[i].click());return s.querySelector(".sel").textContent})()');
 
-    /* ---- 匯出清單：純文字，不准再產生 .md（風 踩到的坑） ---- */
+    /* ---- 匯出清單：純文字，不准再產生 .md ---- */
     await evalJS(cdp, SR + '.querySelector("[data-act=exp]").click()');
     let listPath = null;
     const tL = Date.now();
@@ -343,7 +343,7 @@ const NTHREAD = 'document.querySelectorAll(".thread").length';
       check('有抓到第 1 篇內容', md.indexOf('MARKER_t0') >= 0);
       check('同名討論串兩個都匯出（t0 / t8）', md.indexOf('MARKER_t0') >= 0 && md.indexOf('MARKER_t8') >= 0);
       check('有抓到第 3 篇內容', md.indexOf('MARKER_t2') >= 0);
-      /* 長文延遲渲染：尾巴不能漏（風 44 篇那次踩到的坑） */
+      /* 長文延遲渲染：尾巴不能漏 */
       check('長文的尾巴有抓到（沒被截斷）',
         md.indexOf('TAIL_t0') >= 0 && md.indexOf('TAIL_t2') >= 0 && md.indexOf('TAIL_t8') >= 0,
         [md.indexOf('TAIL_t0'), md.indexOf('TAIL_t2'), md.indexOf('TAIL_t8')].join(','));
@@ -354,39 +354,39 @@ const NTHREAD = 'document.querySelectorAll(".thread").length';
       check('段落之間有空行', /\n\n重點一/.test(md), JSON.stringify(md.slice(md.indexOf('重點整理') - 6, md.indexOf('重點整理') + 30)));
       check('標題前後留了兩行', md.indexOf('\n\n\n重點整理\n\n') >= 0);
 
-      /* 來源卡片：整排都不收（風 說讀的人根本不會點） */
+      /* 來源卡片：整排都不收（讀的人根本不會點） */
       check('來源卡片沒有被匯出',
-        md.indexOf('腾讯') < 0 && md.indexOf('cloud.tencent') < 0 &&
+        md.indexOf('示例') < 0 && md.indexOf('example.net') < 0 &&
         md.indexOf('github.com') < 0 && md.indexOf('example.org') < 0,
-        [md.indexOf('腾讯'), md.indexOf('cloud.tencent'), md.indexOf('github.com'), md.indexOf('example.org')].join(','));
-      check('卡片標題沒有被匯出', md.indexOf('寫了個適配器') < 0 && md.indexOf('Build adapters') < 0);
+        [md.indexOf('示例'), md.indexOf('example.net'), md.indexOf('github.com'), md.indexOf('example.org')].join(','));
+      check('卡片標題沒有被匯出', md.indexOf('編寫適配器') < 0 && md.indexOf('Getting started with adapters') < 0);
       check('「來源」標籤沒有留下', !/^來源$/m.test(md), JSON.stringify(md.slice(md.indexOf('來源') - 40, md.indexOf('來源') + 40)));
       check('回答本文沒有被砍掉', md.indexOf('重點二') >= 0 && md.indexOf('網友補充') >= 0);
       /* 來源卡片有些是 role=link 不是 <a>，一樣要收乾淨 */
       check('role=link 的卡片也沒有被匯出',
-        md.indexOf('线程管理') < 0 && md.indexOf('Astro') < 0 && md.indexOf('example.org') < 0,
-        [md.indexOf('线程管理'), md.indexOf('Astro'), md.indexOf('example.org')].join(','));
+        md.indexOf('任务管理') < 0 && md.indexOf('Example Provider') < 0 && md.indexOf('example.org') < 0,
+        [md.indexOf('任务管理'), md.indexOf('Example Provider'), md.indexOf('example.org')].join(','));
       /* 旁邊那欄的贊助廣告 */
       check('廣告沒有被匯出',
         md.indexOf('Genspark') < 0 && md.indexOf('Nano Banana') < 0 &&
         md.indexOf('買一送一') < 0 && md.indexOf('贊助') < 0,
         [md.indexOf('Genspark'), md.indexOf('買一送一')].join(','));
-      /* 右欄卡片：<a> 只有 aria-label、文字放在兄弟節點（風 實際抓到的 DOM） */
+      /* 右欄卡片：<a> 只有 aria-label、文字放在兄弟節點（實際頁面的 DOM） */
       check('右欄的來源卡片沒有被匯出',
-        md.indexOf('永佳樂有線電視') < 0 && md.indexOf('mediacatv') < 0 &&
-        md.indexOf('Mobile01') < 0 && md.indexOf('Ulti Box') < 0,
-        [md.indexOf('永佳樂有線電視'), md.indexOf('Mobile01'), md.indexOf('Ulti Box')].join(','));
-      /* 來源面板：ul > li > div[data-src-id]，<a aria-label="Qwen"> 只有站名幾個字 */
-      check('來源面板（Qwen 那種）沒有被匯出',
-        md.indexOf('Qwen3.5-Omni Technical Report') < 0 && md.indexOf('arXtv.org') < 0 &&
-        md.indexOf('阿里雲文檔') < 0 && md.indexOf('顯示全部') < 0,
-        [md.indexOf('Qwen3.5-Omni'), md.indexOf('阿里雲文檔'), md.indexOf('顯示全部')].join(','));
+        md.indexOf('範例網路服務商') < 0 && md.indexOf('example.net') < 0 &&
+        md.indexOf('範例論壇') < 0 && md.indexOf('Example Box') < 0,
+        [md.indexOf('範例網路服務商'), md.indexOf('範例論壇'), md.indexOf('Example Box')].join(','));
+      /* 來源面板：ul > li > div[data-src-id]，<a aria-label="示例站"> 只有站名幾個字 */
+      check('來源面板（示例站 那種）沒有被匯出',
+        md.indexOf('示例技术报告 Example Technical Report') < 0 && md.indexOf('arXtv.org') < 0 &&
+        md.indexOf('示例文檔') < 0 && md.indexOf('顯示全部') < 0,
+        [md.indexOf('示例技术报告'), md.indexOf('示例文檔'), md.indexOf('顯示全部')].join(','));
       /* 正文裡的連結不能跟著被砍（誤刪測試） */
       check('正文裡的連結段落還在',
         md.indexOf('延伸閱讀') >= 0 && md.indexOf('這篇說明') >= 0 && md.indexOf('更多細節') >= 0,
         JSON.stringify(md.slice(md.indexOf('延伸閱讀') - 20, md.indexOf('延伸閱讀') + 40)));
 
-      check('簡體都轉成繁體了', md.indexOf('线') < 0 && md.indexOf('适') < 0 && md.indexOf('腾讯') < 0,
+      check('簡體都轉成繁體了', md.indexOf('线') < 0 && md.indexOf('适') < 0 && md.indexOf('示例') < 0,
         JSON.stringify(md.slice(md.indexOf('網友補充'), md.indexOf('網友補充') + 40)));
       check('有轉出繁體字', md.indexOf('線程') >= 0 && md.indexOf('適配器') >= 0,
         JSON.stringify(md.slice(md.indexOf('網友補充'), md.indexOf('網友補充') + 40)));
@@ -427,10 +427,10 @@ const NTHREAD = 'document.querySelectorAll(".thread").length';
       check('JSON 有 3 篇', !!obj && obj.threads.length === 3, obj ? obj.threads.length : '');
       const jt = obj ? obj.threads.map((x) => x.text).join('\n') : '';
       check('JSON 裡也沒有來源卡片',
-        jt.indexOf('腾讯') < 0 && jt.indexOf('cloud.tencent') < 0 && jt.indexOf('github.com') < 0);
+        jt.indexOf('示例') < 0 && jt.indexOf('example.net') < 0 && jt.indexOf('github.com') < 0);
       check('JSON 裡也沒有廣告', jt.indexOf('Genspark') < 0 && jt.indexOf('買一送一') < 0);
-      check('JSON 裡也沒有右欄卡片', jt.indexOf('永佳樂有線電視') < 0 && jt.indexOf('Ulti Box') < 0);
-      check('JSON 裡也沒有來源面板', jt.indexOf('Qwen3.5-Omni') < 0 && jt.indexOf('阿里雲文檔') < 0);
+      check('JSON 裡也沒有右欄卡片', jt.indexOf('範例網路服務商') < 0 && jt.indexOf('Example Box') < 0);
+      check('JSON 裡也沒有來源面板', jt.indexOf('示例技术报告') < 0 && jt.indexOf('示例文檔') < 0);
       check('JSON 每篇內容都不一樣',
         !!obj && new Set(obj.threads.map((x) => x.text)).size === 3);
       check('JSON 裡保留正文連結', jt.indexOf('延伸閱讀') >= 0);

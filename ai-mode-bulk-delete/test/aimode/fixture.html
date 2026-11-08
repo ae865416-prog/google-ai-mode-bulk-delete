@@ -95,7 +95,7 @@
   .adsub { font-size: 12px; color: #9aa0a6; }
   .adslot { background: #262a2f; border-radius: 10px; padding: 10px 12px; margin: 14px 0;
             font-size: 12px; color: #c9ced6; }
-  /* 右欄那種卡片：外殼是一個沒有文字、只有 aria-label 的 <a>（風 抓到的結構） */
+  /* 右欄那種卡片：外殼是一個沒有文字、只有 aria-label 的 <a>（實際頁面的結構） */
   .rightrail { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
   .rcard { position: relative; background: #1c1f23; border: 1px solid #2b2f35; border-radius: 12px;
            padding: 10px 12px; }
@@ -209,7 +209,7 @@
       '<div class="rsnip">' + snip + '</div>' +
       '</div>';
   }
-  // 風 實際抓到的「來源面板」：ul > li > div[data-src-id]，<a aria-label="Qwen">（站名只有 4 個字）
+  // 來源面板：ul > li > div[data-src-id]，<a aria-label="短站名">（站名只有 3 個字，用來考驗判斷規則）
   function srcPanelCard(site, title, snip, href) {
     return '<li><div class="scard" data-src-id="1" data-src-fp="false" data-crb-el="kXllB">' +
       '<a class="vcob" data-link-behavior="cobrowse" target="_blank" rel="noopener" aria-label="' + site + '"' +
@@ -243,7 +243,7 @@
         '<p>重點一：先把需求拆成幾個小步驟，才知道要先動哪裡。</p>' +
         '<p>重點二：每一步都要能驗證，不然最後會不知道是哪一步壞的。</p>' +
         '<p>延伸閱讀可以看 <a href="https://example.com/guide">這篇說明</a>，裡面有更多細節跟範例。</p>' +
-        '<p>網友補充：这个线程讨论得很清楚，适配器也很好用，值得参考。</p>' +
+        '<p>网友补充：这个线程讨论得很清楚，适配器也很好用，值得参考。</p>' +
         /* 旁邊的贊助廣告 不該進檔案 */
         '<div class="adbox">' +
           '<span class="adbadge">贊助</span>' +
@@ -255,37 +255,37 @@
         '<div class="srcs">' +
           '<div class="srclabel">來源</div>' +
           '<div class="srcrow">' +
-            srcCard('dsh 也能进Discord 了：我给DeepSeek Harness 写了个适配器 - 腾讯云', 'cloud.tencent.com', 'https://cloud.tencent.com/developer/article/1') +
-            srcCard('Build adapters for AI agents - GitHub Docs', 'github.com', 'https://github.com/docs/adapter') +
-            srcCardNoLink('线程管理的最佳实践', 'example.org') +
-            srcCardNoLink('Astro 退租要還什麼', 'astro.com.my') +
+            srcCard('示例文章：如何编写适配器 - 示例博客', 'cloud.tencent.com', 'https://cloud.tencent.com/developer/article/1') +
+            srcCard('Getting started with adapters - Example Docs', 'github.com', 'https://github.com/docs/adapter') +
+            srcCardNoLink('任务管理的最佳实践', 'example.org') +
+            srcCardNoLink('退租時要歸還哪些設備', 'example.com') +
           '</div>' +
         '</div>' +
         '<div class="rightrail">' +
-          railCard('永佳樂有線電視',
-            '數位有線電視- 影視娛樂| 寬頻上網、光纖上網 - 永佳樂有線電視',
+          railCard('範例網路服務商',
+            '數位有線電視- 影視娛樂| 寬頻上網、光纖上網 - 範例網路服務商',
             '申請數位服務用戶可付押借用數位機上盒設備,需收取保證金1,000元。繳付之保證金於用戶退租歸還數位機上盒後無息歸還(數位機上盒租借費用',
-            'https://www.mediacatv.com.tw/T02/content_18_2812_3484.html') +
-          railCard('Mobile01',
-            '請問關於有線電視申請第二台數位上盒的費用。 - Mobile01',
+            'https://example.net/cable/services') +
+          railCard('範例論壇',
+            '請問關於申請第二台機上盒的費用 - 範例論壇',
             '家中有線電視業者 … 時歸還。第二臺收800元,退租時不會退回因為不是押金對方稱收視費。',
-            'https://www.mobile01.com/topicdetail.php?f=421&t=4381280') +
-          railCard('Astro Malaysia',
-            'What are the items that I need to return to Astro?',
-            'For customers with the Ultra or Ulti Box, you are required to return only the A',
-            'https://www.astro.com.my/help/return') +
+            'https://example.org/forum/topic?id=123') +
+          railCard('Example Provider',
+            'What are the items that I need to return?',
+            'For customers with the standard or premium box, you are required to return only the A',
+            'https://example.com/help/return') +
         '</div>' +
         '<div class="srcpanel">' +
           '<ul class="slist">' +
-            srcPanelCard('Qwen', 'Qwen3.5-Omni Technical Report',
-              '* Blog. * Publication. * About. * Try Qwen Chat. ... Performance. ... Below we present the comprehensive evaluation of our models against frontier',
-              'https://qwen.ai/blog?id=qwen3.5-omni') +
-            srcPanelCard('arXtv.org', '[2604.15804] Qwen3.5-Omni Technical Report',
-              '[2604.15804] Qwen3.5-Omni Technical Report. ... Table_title: Qwen3.5-Omni Technical Report Table_conte...',
-              'https://arxiv.org/abs/2604.15804') +
-            srcPanelCard('阿里雲文檔', 'Qwen-Omni-大模型服務平台百煉 (Model Studio) - 阿里雲文檔',
+            srcPanelCard('示例站', '示例技术报告 Example Technical Report',
+              '* Blog. * Publication. * About. * Try Example Chat. ... Performance. ... Below we present the comprehensive evaluation of our models against frontier',
+              'https://example.ai/blog?id=1') +
+            srcPanelCard('arXtv.org', '[2604.15804] 示例技术报告 Example Technical Report',
+              '[2604.15804] 示例技术报告 Example Technical Report. ... Table_title: 示例技术报告 Example Technical Report Table_conte...',
+              'https://example.org/abs/0000.00000') +
+            srcPanelCard('示例文檔', '示例模型服务平台文档 - 示例云文档',
               '大模型服務平台百煉 * 視覺智能開放平台（文檔停止維護） 自然語言處理 * 自然語言處理 ...',
-              'https://help.aliyun.com/model-studio/qwen-omni') +
+              'https://example.com/docs/model-service') +
           '</ul>' +
           '<button class="showall" type="button">顯示全部</button>' +
         '</div>' +
