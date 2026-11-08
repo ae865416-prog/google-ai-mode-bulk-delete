@@ -45,4 +45,4 @@ node test/run-test.js
 
 ## 授權
 
-MIT
+MIT，詳細條文見 [LICENSE](LICENSE)。
