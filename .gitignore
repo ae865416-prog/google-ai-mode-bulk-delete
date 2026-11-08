@@ -1,0 +1,19 @@
+# 打包檔（用 GitHub Releases 發就好）
+ai-mode-bulk-delete-v*.zip
+*.crx
+*.pem
+
+# 測試產物
+ai-mode-bulk-delete/test/out/
+node_modules/
+*.log
+
+# 本機截圖（VM 畫面之類的，不進版控）
+vm-*.png
+
+# Windows / 編輯器雜項
+Thumbs.db
+desktop.ini
+.DS_Store
+.idea/
+.vscode/

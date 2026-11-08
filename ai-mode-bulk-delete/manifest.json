@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "AI 模式 · 批次刪除",
+  "short_name": "AI Mode Bulk Delete",
+  "version": "1.2.9",
+  "description": "在 Google AI 模式的側邊欄勾選多個討論串，一次批次刪除。免費、無上限、資料不外傳。",
+  "permissions": ["storage", "tabs", "clipboardWrite"],
+  "host_permissions": [
+    "*://*.google.com/*",
+    "*://*.google.com.tw/*",
+    "*://*.google.com.hk/*",
+    "*://*.google.co.jp/*",
+    "*://*.google.co.kr/*",
+    "*://*.google.com.sg/*",
+    "*://*.google.com.au/*",
+    "*://*.google.co.uk/*"
+  ],
+  "action": {
+    "default_title": "AI 模式 · 批次刪除",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/*",
+        "*://*.google.com.tw/*",
+        "*://*.google.com.hk/*",
+        "*://*.google.co.jp/*",
+        "*://*.google.co.kr/*",
+        "*://*.google.com.sg/*",
+        "*://*.google.com.au/*",
+        "*://*.google.co.uk/*"
+      ],
+      "js": ["content/s2t.js", "content/i18n.js", "content/content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}
